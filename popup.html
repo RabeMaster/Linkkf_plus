@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Linkkf_plus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="width: 300px; height: 250px;" class="container mt-4">
+    <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="option_speed">
+        <label class="form-check-label" for="option_speed">배속 옵션 추가</label>
+    </div>
+
+    <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="option_arrow">
+        <label class="form-check-label" for="option_arrow">스페이스바 | 좌/우 방향키 활성화</label>
+    </div>
+
+    <div class="mb-3">
+        <label for="option_seek" class="form-label">이동 초단위 입력 (기본값 : 10)</label>
+        <input type="number" id="option_seek" class="form-control" value="10" min="1" max="60">
+    </div>
+
+    <button id="btn_save" class="btn btn-primary">저장</button>
+
+    <script src="popup_script.js"></script>
+</body>
+
+</html>
