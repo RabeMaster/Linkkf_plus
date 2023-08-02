@@ -5,8 +5,12 @@ window.addEventListener('message', (event) => {
 
         var old_player = videojs('my-video');
         var save_video = old_player.src();
-        var save_vtt = old_player.textTracks()[1].src;
-
+        var save_vtt;
+        old_player.textTracks().tracks_.forEach(function (element) {
+            if (element.src && element.src.includes('.vtt')) {
+                save_vtt = element.src;
+            }
+        });
         old_player.dispose();
 
         document.body.innerHTML += `

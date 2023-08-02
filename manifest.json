@@ -16,7 +16,9 @@
     "content_scripts": [
         {
             "matches": [
-                "https://*/k/k/p/*.php*"
+                "https://*/k/k/p/*.php*",
+                "https://*/k/hz/*.php*",
+                "https://*/k/k/*.php*"
             ],
             "js": [
                 "fix_script.js"
