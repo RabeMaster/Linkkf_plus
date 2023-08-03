@@ -1,7 +1,7 @@
 window.addEventListener('message', (event) => {
     if (event.source !== window) return;
     if (event.data.type && (event.data.type === 'TO_EXTERNAL_SCRIPT')) {
-        const storage = event.data.data;
+        const storage = event.data.storage;
 
         var old_player = videojs('my-video');
         var save_video = old_player.src();
@@ -20,30 +20,42 @@ window.addEventListener('message', (event) => {
   </video>`;
 
         videojs('my-video', {
-            playbackRates: storage.option_speed ? [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6, 7, 8, 9, 10] : [0.5, 1, 1.5, 2]
+            playbackRates: storage.ch_addspeed ? [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6, 7, 8, 9, 10] : [0.5, 1, 1.5, 2]
         });
         var player = videojs('my-video');
         player.seekButtons({
-            forward: storage.option_seek,
-            back: storage.option_seek
+            forward: parseInt(storage.in_seek),
+            back: parseInt(storage.in_seek)
         });
+        if (storage.ch_intro) {
+            player.seekButtons({ forward: parseInt(storage.in_intro) });
+        }
         player.aspectRatioPanel();
         player.mobileUi();
-        if (storage.option_arrow) {
-            document.addEventListener("keydown", function (event) {
-                const LEFT = 37;
-                const RIGHT = 39;
-                const SPACE = 32;
 
-                if (event.keyCode === LEFT) {
-                    player.currentTime(player.currentTime() - storage.option_seek)
-                } else if (event.keyCode === RIGHT) {
-                    player.currentTime(player.currentTime() + storage.option_seek)
-                } else if (event.keyCode === SPACE) {
-                    player.paused() ? player.play() : player.pause();
-                }
-            });
+        if (storage.ch_volume) {
+            player.volume(parseFloat(storage.in_volume));
         }
+
+        document.addEventListener("keydown", function (event) {
+            const LEFT = 37;
+            const RIGHT = 39;
+            const SPACE = 32;
+            const UP = 38;
+            const DOWN = 40;
+
+            if (storage.ch_leftright && event.keyCode == LEFT) {
+                player.currentTime(player.currentTime() - parseInt(storage.in_seek));
+            } else if (storage.ch_leftright && event.keyCode == RIGHT) {
+                player.currentTime(player.currentTime() + parseInt(storage.in_seek));
+            } else if (storage.ch_space && event.keyCode == SPACE) {
+                player.paused() ? player.play() : player.pause();
+            } else if (storage.ch_updown && event.keyCode == UP) {
+                (player.volume() < 1) ? player.volume(player.volume() + 0.05) : null;
+            } else if (storage.ch_updown && event.keyCode == DOWN) {
+                (player.volume() > 0) ? player.volume(player.volume() - 0.05) : null;
+            }
+        });
     }
 });
 

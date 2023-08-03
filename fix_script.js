@@ -1,3 +1,8 @@
+const elements = [
+  'ch_addspeed', 'ch_space', 'ch_updown', 'ch_leftright',
+  'in_seek', 'ch_volume', 'in_volume', 'ch_intro', 'in_intro'
+];
+
 function injectScript(file_path, tag) {
   var script = document.createElement('script');
   script.setAttribute('type', 'text/javascript');
@@ -8,9 +13,8 @@ function injectScript(file_path, tag) {
 window.addEventListener('message', (event) => {
   if (event.source !== window) return;
   if (event.data.type && (event.data.type === 'FROM_EXTERNAL_SCRIPT')) {
-    chrome.storage.sync.get(['option_speed', 'option_arrow', 'option_seek'], (data) => {
-      const { option_speed, option_arrow, option_seek } = data;
-      window.postMessage({ type: 'TO_EXTERNAL_SCRIPT', data: data }, '*');
+    chrome.storage.sync.get(elements, function (data) {
+      window.postMessage({ type: 'TO_EXTERNAL_SCRIPT', storage: data }, '*');
     });
   }
 });

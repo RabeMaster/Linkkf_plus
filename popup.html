@@ -4,28 +4,71 @@
 <head>
     <meta charset="utf-8">
     <title>Linkkf_plus</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet" />
+    <style>
+    </style>
 </head>
 
-<body style="width: 300px; height: 250px;" class="container mt-4">
-    <div class="form-check mb-3">
-        <input type="checkbox" class="form-check-input" id="option_speed">
-        <label class="form-check-label" for="option_speed">배속 옵션 추가</label>
+<body style="width: 300px; height: 430px; background-color: rgb(248, 248, 248);" class="container mt-4">
+
+    <div class="form-check form-switch" style="height: 40px;">
+        <input class="form-check-input" type="checkbox" role="switch" id="ch_addspeed" />
+        <label class="form-check-label" for="ch_addspeed">배속 옵션 추가</label>
     </div>
 
-    <div class="form-check mb-3">
-        <input type="checkbox" class="form-check-input" id="option_arrow">
-        <label class="form-check-label" for="option_arrow">스페이스바 | 좌/우 방향키 활성화</label>
+    <div class="form-check form-switch" style="height: 40px;">
+        <input class="form-check-input" type="checkbox" role="switch" id="ch_space" />
+        <label class="form-check-label" for="ch_space">스페이스바 재생/정지</label>
     </div>
 
-    <div class="mb-3">
-        <label for="option_seek" class="form-label">이동 초단위 입력 (기본값 : 10)</label>
-        <input type="number" id="option_seek" class="form-control" value="10" min="1" max="60">
+    <div class="form-check form-switch" style="height: 40px;">
+        <input class="form-check-input" type="checkbox" role="switch" id="ch_updown" />
+        <label class="form-check-label" for="ch_updown">상/하 방향키 볼륨조절</label>
     </div>
 
-    <button id="btn_save" class="btn btn-primary">저장</button>
+    <div class="form-check form-switch" style="height: 40px;">
+        <input class="form-check-input" type="checkbox" role="switch" id="ch_leftright" />
+        <label class="form-check-label" for="ch_leftright">좌/우 방향키 위치조절</label>
+    </div>
+
+    <div class="form-outline" style="width: 100px;">
+        <i class="fas trailing">초</i>
+        <input value="10" min="1" max="60" type="number" id="in_seek" class="form-control form-icon-trailing" />
+        <label class="form-label" for="in_seek">위치조절</label>
+    </div>
+
+    <div style="height: 10px;">
+    </div>
+
+    <div class="form-check form-switch" style="height: 40px;">
+        <input class="form-check-input" type="checkbox" role="switch" id="ch_volume" />
+        <label class="form-check-label" for="ch_volume">고정 볼륨 설정</label>
+    </div>
+
+    <label class="form-label" for="in_volume">볼륨 설정</label>
+    <div class="range">
+        <input type="range" class="form-range" min="0.0" max="1.0" step="0.01" id="in_volume" />
+    </div>
+
+    <div class="form-check form-switch" style="height: 40px;">
+        <input class="form-check-input" type="checkbox" role="switch" id="ch_intro" />
+        <label class="form-check-label" for="ch_intro">인트로 스킵 버튼 추가</label>
+    </div>
+
+    <div class="form-outline" style="width: 100px;">
+        <i class="fas trailing">초</i>
+        <input value="80" min="1" max="120" type="number" id="in_intro" class="form-control form-icon-trailing" />
+        <label class="form-label" for="in_intro">스킵조절</label>
+    </div>
 
     <script src="popup_script.js"></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="cdnjs.cloudflare.com_ajax_libs_mdb-ui-kit_6.4.1_mdb.min.js"></script>
 </body>
 
 </html>

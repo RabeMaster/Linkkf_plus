@@ -1,37 +1,33 @@
-const option_arrow = document.getElementById('option_arrow');
-const seek_input = document.getElementById('seek_input');
+const elements = [
+  'ch_addspeed', 'ch_space', 'ch_updown', 'ch_leftright',
+  'in_seek', 'ch_volume', 'in_volume', 'ch_intro', 'in_intro'
+];
 
-document.getElementById('btn_save').addEventListener('click', () => {
-  const option_speed = document.getElementById('option_speed').checked;
-  const option_arrow = document.getElementById('option_arrow').checked;
-  option_seek = parseInt(document.getElementById('option_seek').value);
-  saveOptions(option_speed, option_arrow, option_seek);
+elements.forEach(elementId => {
+  const element = document.getElementById(elementId);
+
+  element.addEventListener('change', () => {
+    const key = elementId;
+    if (elementId.includes('ch_')) {
+      chrome.storage.sync.set({ [key]: element.checked });
+    } else {
+      chrome.storage.sync.set({ [key]: element.value });
+    }
+  });
 });
 
-function saveOptions(option_speed, option_arrow, option_seek) {
-  const options = {
-    option_speed: option_speed,
-    option_arrow: option_arrow,
-    option_seek: option_seek
-  };
+function loadSettingsFromStorage() {
+  chrome.storage.sync.get(elements, function (data) {
+    elements.forEach(elementId => {
+      const element = document.getElementById(elementId);
 
-  chrome.storage.sync.set(options, () => {
-    console.log('설정이 저장되었습니다.');
+      if (elementId.includes('ch_')) {
+        element.checked = data[elementId];
+      } else {
+        element.value = data[elementId];
+      }
+    });
   });
 }
 
-function loadOptions() {
-  chrome.storage.sync.get(['option_speed', 'option_arrow', 'option_seek'], (data) => {
-    const { option_speed, option_arrow, option_seek } = data;
-    if (!option_speed && !option_arrow && !option_seek) {
-      saveOptions(true, true, 10);
-      loadOptions();
-      return;
-    }
-    document.getElementById('option_speed').checked = option_speed;
-    document.getElementById('option_arrow').checked = option_arrow;
-    document.getElementById('option_seek').value = option_seek;
-  });
-}
-
-loadOptions();
+document.addEventListener('DOMContentLoaded', loadSettingsFromStorage);
