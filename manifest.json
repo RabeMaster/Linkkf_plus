@@ -21,6 +21,7 @@
             "matches": [
                 "https://*/k/k/p/*.php*",
                 "https://*/k/hz/*.php*",
+                "https://*/gg/*.php*",
                 "https://*/k/k/*.php*"
             ],
             "js": [
