@@ -30,7 +30,7 @@ window.addEventListener('message', (event) => {
         if (storage.ch_intro) {
             player.seekButtons({ forward: parseInt(storage.in_intro) });
         }
-        player.aspectRatioPanel();
+        //player.aspectRatioPanel();
         player.mobileUi();
 
         if (storage.ch_volume) {
