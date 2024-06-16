@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Linkkf_plus",
     "description": "불편해서 만든 Linkkf 확장 플러그인",
-    "version": "1.1",
+    "version": "1.2",
     "icons": {
         "16": "images/icon-16.png",
         "32": "images/icon-32.png",
@@ -19,6 +19,8 @@
     "content_scripts": [
         {
             "matches": [
+                "https://*/r2/*.php*",
+                "https://*/b2/*.php*",
                 "https://*/k/k/p/*.php*",
                 "https://*/k/hz/*.php*",
                 "https://*/gg/*.php*",
